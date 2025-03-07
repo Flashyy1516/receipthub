@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#8A2BE2">
+    <meta property="og:site_name" content="ReceiptHub.me">
+    <meta property="og:title" content="ReceiptHub">
+    <meta property="og:description" content="ReceiptHub is your best pal when it comes to reselling.">
+    <meta property="og:image" content="static/images/logo.png">
+    <link rel="shortcut icon" href="https://ReceiptHub.me/static/images/logo.png" type="image/x-icon">
+    <title>ReceiptH</title>
+    <link rel="stylesheet" href="./receipthub_files/style.css">
+    <link rel="stylesheet" href="./receipthub_files/all.min.css">
+    <style>
+        /* Impostazione dell'immagine di sfondo per l'intero body */
+        body {
+            background-image: url('https://images.unsplash.com/photo-1519681391066-94db7276e7b8?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjA0OHwwfDF8c2VhY2h8MXx8c2FmZSUyMGltYWdlfGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1080'); /* Immagine di sfondo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fissa lo sfondo mentre scorri */
+            min-height: 100vh; /* Almeno l'altezza della finestra */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Effetto sfocato sull'immagine di sfondo */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://media.discordapp.net/attachments/1325176045892141127/1347612757096140872/hmmmm.png?ex=67cc75ae&is=67cb242e&hm=49c7c8b17c7e666dcb8ba5b63433bd4be5b1ce203062c0598fdd37bbefde5906&=&format=webp&quality=lossless&width=1200&height=675'); /* Immagine di sfondo sfocata */
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px); /* Impostiamo la sfocatura */
+            z-index: -1; /* Assicura che sia dietro al contenuto */
+        }
+
+        .header-title {
+            position: relative;
+            z-index: 1;
+            font-size: 3em;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .user-info {
+            z-index: 1;
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-discord-button {
+            background-color: #7289da;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .purchase-button {
+            background-color: #8A2BE2;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="header-title">ReceiptHub</div>
+        <div class="user-info">
+            <a href="https://discord.com/oauth2/authorize?client_id=1274134878463594526&response_type=code&redirect_uri=https%3A%2F%2FReceiptHub.me%2Fcallback&scope=identify" class="login-discord-button">Login with Discord</a>
+        </div>
+    </header>    
+
+    <section class="center">
+        <div class="text">
+            <h1>ReceiptHub<!--- <span class="glowing-text">v3.0</span> ---></h1>
+            <p>The best Receipt generator on the market.</p>
+            <a href="http://shop.ReceiptHub.me/" class="purchase-button">Purchase</a>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+        <div class="footer-container">
+            <p>© 2025 ReceiptHub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://ReceiptHub.me/invite" target="_blank" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <a href="https://www.instagram.com/_ReceiptHub/" target="_blank" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ReceiptHub_" target="_blank" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.tiktok.com/@ReceiptHub_" target="_blank" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@ReceiptHub" target="_blank" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://t.me/ReceiptHuboffical" target="_blank" class="social-icon" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="./receipthub_files/script.js.download"></script>
+</body>
+</html>
