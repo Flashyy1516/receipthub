@@ -7325,10 +7325,13 @@ separatorHomeCss{color:red !important}separatorHomeCss{color:red !important}@med
 </div> 
  <div id="845cba7d" class="flex-element widget-wrapper" data-auto="flex-element-widget-wrapper" data-widget-type="spacer" data-external-id="1752535406" bis_skin_checked="1"> <div data-element-type="spacer" class="dmSpacer" id="1752535406" bis_skin_checked="1"></div> 
 </div> 
- <div id="3bf8d80a" class="flex-element widget-wrapper" data-auto="flex-element-widget-wrapper" data-widget-type="link" data-external-id="1219950076" bis_skin_checked="1"> <a data-display-type="block" class="align-center dmButtonLink dmWidget dmWwr default dmOnlyButton dmDefaultGradient u_1219950076" file="false" href="https://shop.receipthub.xyz" data-element-type="dButtonLinkId" id="1219950076" bis_skin_checked="1"> <span class="iconBg" aria-hidden="true" id="1506955949"> <span class="icon hasFontIcon icon-star" id="1285558702"></span> 
+ <div id="3bf8d80a" class="flex-element widget-wrapper sellauth-button2" data-auto="flex-element-widget-wrapper" data-widget-type="" data-external-id="1219950076" bis_skin_checked="1"> <a data-display-type="block" class="align-center dmButtonLink dmWidget dmWwr default dmOnlyButton dmDefaultGradient u_1219950076" file="false" data-element-type="dButtonLinkId" id="1219950076" bis_skin_checked="1"> <span class="iconBg" aria-hidden="true" id="1506955949"> <span class="icon hasFontIcon icon-star" id="1285558702"></span> 
 </span> 
- <span class="text" id="1534253228">Get Started</span> 
+ <span class="text sellauth-button" id="">Get Started</span> 
 </a> 
+
+
+
 </div> 
 </div> 
  <div id="0ac931ec" class="flex-element group" data-auto="flex-element-group" bis_skin_checked="1"> <div id="ddb02312" class="flex-element widget-wrapper" data-auto="flex-element-widget-wrapper" data-widget-type="spacer" data-external-id="1323842778" bis_skin_checked="1"> <div data-element-type="spacer" class="dmSpacer" id="1323842778" bis_skin_checked="1"></div> 
@@ -7410,9 +7413,9 @@ separatorHomeCss{color:red !important}separatorHomeCss{color:red !important}@med
  <div id="75ec4034" class="flex-element widget-wrapper" data-auto="flex-element-widget-wrapper" data-widget-type="divider" data-external-id="1811532879" bis_skin_checked="1"> <div class="dmDividerWrapper clearfix u_1811532879" data-element-type="dDividerId" data-layout="divider-style-1" data-widget-version="2" id="1811532879" bis_skin_checked="1"><hr class="dmDivider" style="border-width:2px; border-top-style:solid; color:grey;" id="1417156375"></div> 
 </div> 
 </div> 
- <div id="dee385c3" class="flex-element widget-wrapper" data-auto="flex-element-widget-wrapper" data-widget-type="link" data-external-id="1778098025" bis_skin_checked="1"> <a data-display-type="block" class="align-center dmButtonLink dmWidget dmWwr default dmOnlyButton dmDefaultGradient u_1778098025" file="false" href="https://shop.receipthub.xyz" data-element-type="dButtonLinkId" id="1778098025" bis_skin_checked="1"> <span class="iconBg" aria-hidden="true" id="1566712756"> <span class="icon hasFontIcon icon-star" id="1351545525"></span> 
+ <div id="dee385c3" class="flex-element widget-wrapper" data-auto="flex-element-widget-wrapper" data-widget-type="link" data-external-id="1778098025" bis_skin_checked="1"> <a data-display-type="block" class="align-center dmButtonLink dmWidget dmWwr default dmOnlyButton dmDefaultGradient u_1778098025" file="false" class="sellauth-button2" data-element-type="dButtonLinkId" id="1778098025" bis_skin_checked="1"> <span class="iconBg" aria-hidden="true" id="1566712756"> <span class="icon hasFontIcon icon-star" id="1351545525"></span> 
 </span> 
- <span class="text" id="1453230593">Get Started</span> 
+ <span class="text sellauth-button" id="">Get Started</span> 
 </a> 
 </div> 
 </div> 
@@ -7884,6 +7887,35 @@ requestAnimationFrame(() => {
 <!--  End Script tags -->
 <!--  Site Wide Html Markup -->
 <!--  Site Wide Html Markup -->
+
+ <script src="https://sellgang.com/embed.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const button = document.querySelector(".sellauth-button");
+
+      button.addEventListener("click", function () {
+        if (!window.sellAuthEmbed || !window.sellAuthEmbed.checkout) {
+          alert("Payment service not available, try again later.");
+          return;
+        }
+
+        button.classList.add("loading");
+
+        window.sellAuthEmbed.checkout(button, {
+          cart: [
+            {
+              productId: 289768,
+              variantId: 389735,
+              quantity: 1
+            }
+          ],
+          shopId: 131587,
+          modal: true
+        });
+
+      });
+    });
+  </script>
 
 
 <div id="shrinking-anchor" bis_skin_checked="1"></div></body>
