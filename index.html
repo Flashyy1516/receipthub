@@ -7069,35 +7069,64 @@ separatorHomeCss{color:red !important}separatorHomeCss{color:red !important}@med
 </div> 
 <script src="https://sellauth.com/assets/js/sellauth-embed-2.js"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer-theme-default.min.css" />
+
 <div class="subscription-wrapper">
   <div class="subscription-container">
     <span class="subscription-label">Purchase a subscription now</span>
-
     <div class="subscription-controls">
       <select id="subscriptionSelect" class="subscription-select-glow">
         <option value="">Choose…</option>
-        <option value='{"productId":289768,"variantId":389735,"shopId":131587}'>Daily – £2.99</option>
-        <option value='{"productId":289839,"variantId":389891,"shopId":131587}'>Weekly – £7.49</option>
-        <option value='{"productId":289844,"variantId":389901,"shopId":131587}'>Monthly – £19.99</option>
-        <option value='{"productId":289845,"variantId":389907,"shopId":131587}'>Quarterly – £39.99</option>
-        <option value='{"productId":289846,"variantId":389913,"shopId":131587}'>Lifetime – £59.99</option>
+        <option value='{"productId":289768,"variantId":389735,"shopId":131587,"price":2.99}' disabled>1 Day – £2.99</option>
+        <option value='{"productId":289839,"variantId":389891,"shopId":131587,"price":7.49}' disabled>1 Week – £7.49</option>
+        <option value='{"productId":289844,"variantId":389901,"shopId":131587,"price":9.99}'>1 Month – £9.99</option>
+        <option value='{"productId":289845,"variantId":389907,"shopId":131587,"price":19.99}'>3 Months – £19.99</option>
+        <option value='{"productId":289846,"variantId":389913,"shopId":131587,"price":29.99}'>Lifetime – £29.99</option>
       </select>
-
       <button type="button" id="purchaseBtn" class="glow-button">Purchase</button>
+	  <div class="currency-container">
+		  <div class="total-display">
+			<div id="odometer" class="odometer total-amount">0.00
+			</div>
+			<span class="total-label">TOTAL</span>
+		  </div>
+        
+      </div>
     </div>
   </div>
 </div>
 
+<link href="https://github.hubspot.com/odometer/themes/odometer-theme-default.css" rel="stylesheet">
+<script src="https://github.hubspot.com/odometer/odometer.js"></script>
+
 <style>
+
+#odometer {
+  font-size: 2em;
+  font-weight: bold;
+  position: relative;
+}
+
+#odometer:before {
+  content: "£";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-left: -25px;
+  margin-bottom: -20px;
+}
+
   .subscription-wrapper {
-	  width: 100%;
-	  background: rgba(5, 5, 5, 0.98);
-	  padding: 5rem 1rem 5rem 1rem; /* top, right, bottom, left */
-	  box-shadow: inset 0 0 20px rgba(0, 255, 128, 0.1);
-	}
-
-
-
+    width: 100%;
+    background: #121212;
+    padding: 3rem 1rem;
+    box-shadow: inset 0 0 20px rgba(0, 255, 128, 0.1);
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
   .subscription-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -7105,95 +7134,93 @@ separatorHomeCss{color:red !important}separatorHomeCss{color:red !important}@med
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-	opacity: 0;
-	transform: translateY(50px);
-	transition: all 1s ease-out;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: none !important;
   }
-  
-  .subscription-container.visible {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-	opacity: 1;
-	transform: translateY(0);
-  }
-
   .subscription-label {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: #ccffcc;
-    text-shadow: 0 0 6px #00ff80;
+    color: #a0f0c0;
+    text-shadow: 0 0 6px #00ffb3;
   }
-
   .subscription-controls {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
+    align-items: center;
   }
-
   .subscription-select-glow {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #0b1b0e;
-    color: #ccffcc;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
-    min-width: 250px;
-    box-shadow: 0 0 12px #00ff80, 0 0 20px #00cc66;
+    background-color: #162a1f;
+    color: #50ffcc;
+    border: 2px solid #50ffcc;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #00ffaa, 0 0 16px #00ffcc;
     outline: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill='%2300ff80'%20height='24'%20viewBox='0%200%2024%2024'%20width='24'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.8rem center;
-    background-size: 1rem;
   }
-
-  .subscription-select-glow:hover,
-  .subscription-select-glow:focus {
-    box-shadow: 0 0 16px #00ff80, 0 0 28px #00cc66;
-  }
-
   .glow-button {
-    padding: 0.6rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(45deg, #00ff80, #00cc66);
-    color: white;
+    padding: 0.5rem 1rem;
+    background: #00ffd5;
+    color: black;
     font-weight: bold;
-    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 0 14px #00ff80, 0 0 24px #00cc66, 0 0 36px #00ff80;
-    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffaa;
+    transition: transform 0.2s ease;
   }
-
   .glow-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px #00ff99, 0 0 30px #00dd88, 0 0 45px #00ff88;
   }
+  .total-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+	margin-left: 30px;
+  }
+  .total-label {
+    font-size: 0.75rem;
+    color: #88ffaa;
+    margin-bottom: 0.2rem;
+    letter-spacing: 1px;
+  }
+  .total-amount.odometer {
+    font-size: 1.9rem;
+    font-weight: bold;
+    color: #00ffcc;
+  }
+  main #odometer {
+	max-width: 100px
+}
 </style>
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.3
-  });
-
-  const target = document.querySelector('.subscription-container');
-  if (target) observer.observe(target);
-</script>
-
 
 <script>
+
+
+const priceOdometer = document.querySelector("#totalAmount");
+
+const subscriptionSelect = document.querySelector("#subscriptionSelect");
+
+subscriptionSelect.addEventListener("change", (event) => {
+    const selectedOption = event.target.value;
+
+    if (selectedOption) {
+        const subscription = JSON.parse(selectedOption);
+
+        const newPrice = parseFloat(subscription.price);
+
+		setTimeout(function(){
+    odometer.innerHTML = newPrice;
+}, 100);
+    }
+});
+
   document.getElementById('purchaseBtn').addEventListener('click', function () {
     const sel = document.getElementById('subscriptionSelect');
     if (!sel.value) {
@@ -7209,6 +7236,8 @@ separatorHomeCss{color:red !important}separatorHomeCss{color:red !important}@med
     });
   });
 </script>
+
+
 
 <section class="brands-carousel-section">
   <h6 class="m-text-align-center text-align-center">
