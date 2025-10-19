@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReceiptHub v2</title>
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --main: #10ff82;
+  --shadow: 0 0 34px #10ff82, 0 0 14px #16ff91;
+  --bg: #181e1c;
+  --white: #f3fff7;
+  --accent: #122c1b;
+  --discord: #5865f2;
+}
+/* PRELOADER */
+#preloader {
+  position:fixed;z-index:99999;inset:0;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;background:#050c08;
+  transition:opacity .6s cubic-bezier(.4,0,.2,1),visibility .5s linear;
+}
+#preloader.loaded { opacity:0; pointer-events:none; visibility:hidden; }
+.preloader-logo {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.preloader-svg {
+  width: 95px; height: 95px;
+  animation: prelogoPop 1.1s cubic-bezier(.36,1.22,.68,1.05);
+  filter: drop-shadow(0 0 18px #10ff82aa);
+}
+@keyframes prelogoPop {
+  0% {transform:scale(.7); opacity:0;}
+  70% {transform:scale(1.13);}
+  100% {transform:scale(1); opacity:1;}
+}
+.preloader-dots{
+  margin-top:17px;text-align:center;font-size:20px;letter-spacing:8px;color:#10ff82;text-shadow:0 0 12px #10ff82;
+  font-family: 'Inter', Arial, sans-serif;font-weight:bold;
+  animation: preDotsFlicker 1.5s infinite;
+}
+@keyframes preDotsFlicker {
+  0%{opacity:.4;}30%{opacity:1;}70%{opacity:.85;}100%{opacity:.4;}
+}
+body {font-family:'Inter',Arial,sans-serif;font-weight:700;color:var(--white);margin:0;min-height:100vh;background:#111;overflow-x:hidden;position:relative;}
+.video-bg {position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;overflow:hidden;}
+.video-bg video {object-fit:cover;width:100vw;height:100vh;opacity:0.45;filter:saturate(1.15) blur(0.5px);background:#10ff82;}
+.green-overlay {position:fixed;inset:0;z-index:-1;width:100vw;height:100vh;pointer-events:none;background:linear-gradient(135deg,rgba(16,255,130,0.44) 0%,rgba(18,30,28,0.79) 100%);mix-blend-mode:lighten;}
+nav {background:var(--accent);padding:1em 0;display:flex;justify-content:center;gap:1.5em;font-size:1.13em;border-bottom:2px solid var(--main);box-shadow:var(--shadow);animation: fadeInDown .9s;}
+nav a {color:var(--main);text-decoration:none;font-weight:bold;position:relative;transition:color .2s, text-shadow .3s;text-shadow:var(--shadow);}
+nav a:hover {color:var(--white);text-shadow:0 0 19px var(--main);}
+.hero {text-align:center;padding:5em 2em 2em 2em;animation: fadeInUp 1.2s;position:relative;overflow-x:hidden;min-height:360px;}
+.hero-logo {width:290px;max-width:85vw;display:block;margin:0 auto 1em;filter:drop-shadow(0 0 22px #10ff82);}
+.hero p {font-size:1.18em;color:var(--white);margin-bottom:2em;opacity:.98;}
+.cta {display:flex;justify-content:center;align-items:center;gap:1.2em;margin:2em 0 2em 0;flex-wrap:wrap;}
+.button,.launch-button {background:var(--main);color:var(--accent);min-width:140px;padding:1em 2.2em;border-radius:20px;border:none;font-size:1.13em;font-weight:bold;letter-spacing:1px;box-shadow:var(--shadow);cursor:pointer;transition:background .22s,color .23s,transform .22s,box-shadow .23s;outline:none;text-decoration:none;animation:bounceIn .69s;display:inline-flex;align-items:center;justify-content:center;gap:.58em;}
+.button:hover, .launch-button:hover {background:#63fdad;color:var(--main);transform:scale(1.07) rotate(-1deg);box-shadow:0 0 44px var(--main), 0 0 16px #16ff91;}
+.launch-button {background:#10ff82;color:#181e1c;border-radius:25px;box-shadow:0 0 44px #10ff82;font-size:1.12em;max-height:52px;padding-right:1.6em;text-decoration:none;display:inline-flex;align-items:center;}
+.launch-icon-svg {width:1.5em;height:1.5em;vertical-align:middle;display:inline-block;margin-right:.7em;filter:drop-shadow(0 0 6px #fff);}
+@keyframes bounceIn {from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+/* Carousel Brand Slider */
+.brand-slider {margin:2em auto 1em;width:100%;max-width:650px;height:86px;background:transparent;display:flex;align-items:center;overflow:hidden;position:relative;box-sizing:border-box;filter:drop-shadow(0 0 18px #10ff82);border-radius:18px;justify-content:center;}
+.brand-track {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  min-width: fit-content;
+  height: 86px;
+  animation: brandslide 5s linear infinite;
+}
+@keyframes brandslide {
+  100% { transform: translateX(-25.289%);}
+}
+.brand-slider .brand-track {
+  will-change: transform;
+}
+.brand-logo{width:70px;height:70px;object-fit:contain;border-radius:12px;background:rgba(16,255,130,.14);box-shadow:0 0 16px #22ffb9;transition:filter .23s, transform .21s;flex-shrink:0;margin:0 3px;display:block;}
+.brand-logo:hover{filter:drop-shadow(0 0 32px var(--main));transform:scale(1.13) rotate(-6deg);background:rgba(16,255,130,.29);}
+section{max-width:900px;margin:2em auto;background:rgba(15,38,30,0.96);border-radius:13px;box-shadow:var(--shadow);padding:2em;animation:fadeInUp .77s;}
+.features-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3em;}
+.feature-card {background:rgba(16,255,130,0.12);color:var(--white);border:2px solid #10ff82;border-radius:13px;margin:.2em 0;box-shadow:0 0 20px #10ff8233;padding:1.1em 1em .9em 1em;font-size:1.09em;font-weight:700;text-align:left;position:relative;transition:box-shadow .24s, transform .22s;text-shadow:0 0 6px #10ff8280;animation:fadeInUp .9s;display:flex;align-items:center;gap:0.83em;}
+.feature-card-icon {width:1.8em;height:1.8em;vertical-align:middle;display:inline-block;filter:drop-shadow(0 0 7px #10ff82);}
+.neon {color:var(--main);text-shadow:var(--shadow);}
+.plan-title {font-size:1.17em;color:var(--main);font-weight:bold;margin-bottom:.5em;letter-spacing:.17em;text-shadow:0 0 12px var(--main);}
+.plan-price {font-size:1.27em;font-weight:bold;color:var(--main);margin-bottom:1em;display:inline-block;transition:color 0.2s;min-width:96px;letter-spacing:1px;}
+.price-value {display:inline-block;min-width:68px;font-variant-numeric:tabular-nums;}
+.plans {display:flex;gap:1.3em;flex-wrap:wrap;}
+.plan-card {background:var(--bg);border:2px solid var(--main);border-radius:13px;box-shadow:var(--shadow);flex:1 1 210px;margin-bottom:1em;padding:1.2em .9em;text-align:center;transition:box-shadow .22s;animation:fadeInUp .72s;text-shadow:0 0 8px #10ff82;}
+.plan-card:hover {box-shadow:0 0 54px var(--main);background:#1a252a;}
+.discord-bar {margin:2.1em auto 1.7em;padding:1.2em 1.4em;background:#23272a;border-radius:17px;max-width:430px;box-shadow:0 0 36px #5865f250,0 0 12px #10ff8248;display:flex;align-items:center;justify-content:space-between;text-align:left;gap:1.1em;}
+.discord-badge {display:flex;align-items:center;gap:.4em;background:var(--discord);color:#fff;font-size:1.09em;font-weight:bold;border-radius:13px;padding:.47em 1em .45em .95em;box-shadow:0 0 17px #5865f2ad;letter-spacing:.08em;}
+.discord-badge .discord-icon { width:1.3em;height:1.3em;margin-right:.33em;}
+.discord-bar .discord-join-btn {background:var(--main);color:var(--accent);font-weight:bold;font-size:1em;padding:.57em 1.28em;border-radius:13px;text-decoration:none;transition:background .19s,box-shadow .19s;box-shadow:0 0 17px #10ff82,0 0 7px #10ff8280;border:none;}
+.discord-bar .discord-join-btn:hover {background:#fff;color:#10ff82;box-shadow:0 0 27px #10ff82;}
+.footer-main {margin:1.9em auto 1em auto;text-align:center;}
+.footer-love {margin-top:1em;font-size:1.07em;color:#10ff82;opacity:.87;text-shadow:0 0 9px #10ff82;font-weight:bold;}
+.footer-love .discord-love-link {color:#5865f2;background:#181e1c;border-radius:7px;padding:0.16em 0.73em;text-decoration:none;font-weight:bold;box-shadow:0 0 9px #5865f2;margin-left:.6em;letter-spacing:.03em;font-size:1em;transition:background .16s,box-shadow .16s;vertical-align:middle;display:inline-block;}
+.footer-love .discord-love-link:hover {background:#5865f2;color:#fff;box-shadow:0 0 15px #5865f2;}
+.popup-overlay {position:fixed;inset:0;width:100vw;height:100vh;background:rgba(17,31,25,0.78);backdrop-filter:blur(3px) grayscale(.12);z-index:9998;animation:fadeIn .3s;display:flex;justify-content:center;align-items:center;}
+.popup {background:rgba(13,30,25,0.99);border-radius:22px;box-shadow:0 0 54px #10ff8237;padding:2.4em 2em 2.2em 2em;min-width:340px;max-width:95vw;color:var(--white);text-align:center;position:relative;z-index:9999;animation:bounceIn .42s;border:2px solid #10ff82;font-size:1.09em;font-weight:700;overflow:visible;}
+.popup h3 {color:var(--main);font-size:1.3em;letter-spacing:1px;margin-bottom:1.4em;text-shadow:var(--shadow);font-weight:bold;}
+.popup .subscription-select-glow {font-family:'Montserrat',Arial,sans-serif;font-size:1.14em;padding:1.1em 1.35em;border-radius:27px;border:none;margin-bottom:1.3em;background:#101914;color:var(--main);box-shadow:0 0 14px #10ff8280;font-weight:bold;text-align:center;transition:box-shadow .17s,background .13s,border .25s;width:100%;max-width:350px;letter-spacing:.4px;outline:none;appearance:none;cursor:pointer;}
+.popup .subscription-select-glow:focus,.popup .subscription-select-glow:active{box-shadow:0 0 44px #10ff82;background:#181e1c;border:2px solid #10ff82;}
+.popup .subscription-select-glow option{background:#181e1c;color:#10ff82;border-radius:18px;font-size:1.03em;padding:.7em 1.4em;margin:5px 0;font-weight:bold;box-shadow:0 0 7px #10ff8240;border:none;}
+.popup .subscription-select-glow option:checked,.popup .subscription-select-glow option:focus{background:#10ff82!important;color:#122c1b;}
+.popup .popup-btn{background:var(--main);color:#181e1c;border:none;border-radius:19px;padding:1em 2.2em;font-size:1.09em;font-weight:bold;letter-spacing:1px;margin:.3em auto .2em auto;box-shadow:0 0 24px #10ff82;cursor:pointer;transition:all .2s;text-shadow:0 0 10px #32ffbe;display:inline-block;}
+.popup .popup-btn:hover{background:#63fdad;color:#10ff82;box-shadow:0 0 44px #10ff82;}
+.popup-close{position:absolute;top:15px;right:19px;font-size:1.7em;color:#23ffb9;background:none;border:none;cursor:pointer;font-weight:bolder;transition:color .17s;z-index:2;}
+.popup-close:hover{color:#fff;}
+.spinner-box{position:absolute;inset:0;display:flex;z-index:11;background:rgba(18,40,31,0.74);justify-content:center;align-items:center;animation:fadeIn .2s;}
+.spinner-loader{width:51px;height:51px;display:block;}
+.spinner-loader circle{stroke:#10ff82;stroke-width:7;stroke-linecap:round;opacity:0.95;stroke-dasharray:90 90;stroke-dashoffset:0;animation:spinnercircle 1s linear infinite;transform-origin:center;}
+@keyframes spinnercircle {0%{ stroke-dashoffset:0; transform:rotate(0deg);}100%{ stroke-dashoffset:180; transform:rotate(360deg);}}
+@keyframes fadeIn {from{opacity:0;}to{opacity:.98;}}
+@media (max-width:700px){.brand-slider{max-width:97vw;transform:scale(.91);} .discord-bar{max-width:97vw;}}
+@media (max-width:520px){.hero-logo{width:180px;}.cta{gap:0.6em;}section{padding:.8em;}.discord-bar{flex-direction:column;align-items:center;gap:.9em;}}
+  </style>
+</head>
+<body>
+  <div id="preloader">
+    <div class="preloader-logo">
+      <img class="preloader-svg" src="logo.png">
+      <span class="preloader-dots">ReceiptHub</span>
+    </div>
+  </div>
+  <div class="video-bg">
+    <!--- <video src="https://pouch.jumpshare.com/preview/qqJH3f_UR1eGXQxjUTfUcyxiKq2pENUqA5U3LlxKre1rsepQoqCPK96mTv_cx7gglcXTo-rgLkwSgm5SXKl4s_MTD3x7dZQdHjPKtZhuUj2KVv33RdmdEgp6RFM43GW76-Z8ao-xWx4kiAeVulNwom6yjbN-I2pg_cnoHs_AmgI.mp4" autoplay loop muted playsinline></video> -->
+    <video src="v2-background.mp4" autoplay loop muted playsinline></video>
+  </div>
+  <div class="green-overlay"></div>
+  <nav>
+    <a href="./">Home</a>
+    <a href="#features">Features</a>
+    <a href="#plans">Plans</a>
+    <a href="https://discord.receipthub.xyz/" target="_blank">Discord</a>
+    <a href="https://shop.receipthub.xyz/" target="_blank">Terms Of Service</a>
+  </nav>
+  <section id="features">
+    <h2 style="text-align:center;margin-bottom:1em;">
+      <span class="neon">Terms Of Service</span>
+    </h2>
+    <div class="features-grid">
+      <div class="feature-card">
+
+		  <b>
+			<p><strong>Refund Policy:</strong> Customers have up to 7 days from the date of purchase to request a refund. Refunds will only be granted for valid reasons, subject to review.</p>
+
+			<p><strong>Service Access:</strong> We reserve the right to revoke access to our services at any time, with or without notice, and without obligation to issue a refund.</p>
+
+			<p><strong>Product Use Disclaimer:</strong> All products available on our website are intended strictly for novelty, theatrical, prop, or entertainment purposes. They are not to be used for illegal or fraudulent activities.</p>
+
+			<p><strong>Liability for Misuse:</strong> We, the operators of this website, and our employees are not responsible or liable for any misuse of our products. If products are used for illegal purposes, all legal responsibility rests solely with the user.</p>
+
+			<p><strong>Customer Responsibility:</strong> By purchasing from us, you agree that you are fully responsible for how you use the items, and the provider holds no liability for any actions taken by the customer.</p>
+
+			<p><strong>Acceptance of Responsibility:</strong> The customer acknowledges and accepts full responsibility for any consequences resulting from the use of our products.</p>
+
+			<p><strong>User Eligibility:</strong> By using this website, you confirm that you are not currently or have never been affiliated with any law enforcement agency (such as police, FBI, legal offices, etc.) or any media organization.</p>
+
+			<p><strong>Legal Compliance:</strong> The customer is solely responsible for complying with all local laws and regulations regarding the import and use of any item purchased from this website.</p>
+
+			<p><strong>Product Authenticity:</strong> All items sold are novelty items only. They are not authentic documents or receipts and are not intended for real-world transactions. These items are for entertainment, artistic, or display purposes only. We are not affiliated with any retailer and act as an independent third party.</p>
+
+			<p><strong>Prohibited Use:</strong> Our services must not be used to create fake or fraudulent invoices. Any invoices or documents generated via our platform are for novelty purposes only. The user assumes all liability for their use.</p>
+
+			<p><strong>Definition of Lifetime:</strong> “Lifetime” refers to the duration during which our services are active and operational. If our services are discontinued, lifetime access also ends.</p>
+		  </b>
+		</div>
+
+  </section>
+  <div class="discord-bar">
+    <span class="discord-badge">
+      <svg class="discord-icon" fill="none" stroke="#fff" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9.5" ry="9" fill="#5865f2" stroke="none"/><ellipse cx="9" cy="13" rx="1.25" ry="1.3" fill="#fff"/><ellipse cx="15" cy="13" rx="1.25" ry="1.3" fill="#fff"/></svg>
+      Discord Support
+    </span>
+    <a href="https://discord.receipthub.xyz/" target="_blank" rel="noopener" class="discord-join-btn">Join now</a>
+  </div>
+  <footer class="footer-main">
+    <div>ReceiptHub &copy; 2025</div>
+    <!--- <a href="https://shop.receipthub.xyz/" target="_blank" style="color:#10ff82;">Store</a> --->
+    <!-- <div class="footer-love">
+      Made with love by gkywasdy3
+      <a class="discord-love-link" href="https://discord.com/users/1200796736164200549" target="_blank">Discord</a>
+    </div> -->
+  </footer>
+  <div id="popupContainer" style="display:none"></div>
+  <script src="https://sellauth.com/assets/js/sellauth-embed-2.js"></script>
+  <script>
+window.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{document.getElementById('preloader').classList.add('loaded');},600);
+  setTimeout(()=>{if(document.getElementById('preloader'))document.getElementById('preloader').remove();},1500);
+  // Duplicazione carousel per loop infinito
+  var track = document.getElementById('carousel-track');
+  var brands = Array.from(track.children);
+  brands.forEach(logo=>{ track.appendChild(logo.cloneNode(true)); });
+});
+document.querySelectorAll('.plan-card').forEach(card => {
+  card.addEventListener('mouseenter', function() {
+    var valueElem = card.querySelector('.price-value');
+    if (!valueElem) return;
+    if (valueElem._intervalId) clearInterval(valueElem._intervalId);
+    const target = parseFloat(valueElem.getAttribute('data-price'));
+    let from = 0, steps = 45, step = target / steps, i = 0;
+    valueElem._intervalId = setInterval(() => {
+      from += step;i++;
+      if (from >= target || i >= steps) {
+        from = target;
+        clearInterval(valueElem._intervalId);
+        valueElem._intervalId = null;
+      }
+      valueElem.textContent = '£' + from.toFixed(2);
+    }, 26);
+  });
+  card.addEventListener('mouseleave', function() {
+    var valueElem = card.querySelector('.price-value');
+    if (!valueElem) return;
+    if (valueElem._intervalId) {
+      clearInterval(valueElem._intervalId);
+      valueElem._intervalId = null;
+    }
+    valueElem.textContent = '£' + parseFloat(valueElem.getAttribute('data-price')).toFixed(2);
+  });
+});
+function openSubscriptionPopup() {
+  const popupContainer = document.getElementById('popupContainer');
+  popupContainer.style.display = "flex";
+  popupContainer.innerHTML = `
+    <div class="popup-overlay">
+      <div class="popup" id="subscriptionPopup">
+        <button class="popup-close" onclick="closePopup()">&times;</button>
+        <h3>Select your plan</h3>
+        <select id="subscriptionSelect" class="subscription-select-glow">
+          <option value="">Choose…</option>
+          <option value='{"productId":289768,"variantId":389735,"shopId":131587,"price":2.99}'>1 Day – £2.99</option>
+          <option value='{"productId":289839,"variantId":389891,"shopId":131587,"price":7.49}'>1 Week – £7.49</option>
+          <option value='{"productId":289844,"variantId":389901,"shopId":131587,"price":9.99}'>1 Month – £9.99</option>
+          <option value='{"productId":289845,"variantId":389907,"shopId":131587,"price":19.99}'>3 Months – £19.99</option>
+          <option value='{"productId":289846,"variantId":389913,"shopId":131587,"price":29.99}'>Lifetime – £29.99</option>
+        </select>
+        <button class="popup-btn" id="continueSubBtn">Continue</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("continueSubBtn").onclick = function() {
+    const select = document.getElementById('subscriptionSelect');
+    const val = select.value;
+    if (!val) {
+      select.style.border = "2px solid #f00";
+      select.focus();
+      return;
+    }
+    let popup = document.getElementById("subscriptionPopup");
+    let spinner = document.createElement("div");
+    spinner.className = "spinner-box";
+    spinner.innerHTML = `<svg class="spinner-loader" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="20" stroke="#10ff82" stroke-width="7" stroke-linecap="round"/></svg>`;
+    popup.appendChild(spinner);
+    let data = JSON.parse(val);
+    setTimeout(function() {
+      closePopup();
+      window.sellAuthEmbed.checkout(null, {
+        cart: [{ productId: data.productId, variantId: data.variantId, quantity: 1 }],
+        shopId: data.shopId,
+        modal: true
+      });
+    }, 900);
+  };
+}
+function closePopup() {
+  const popupContainer = document.getElementById('popupContainer');
+  popupContainer.style.display = "none";
+  popupContainer.innerHTML = '';
+}
+document.getElementById('startNowBtn').onclick = openSubscriptionPopup;
+document.getElementById('startNowBtnFooter').onclick = openSubscriptionPopup;
+  </script>
+</body>
+</html>
