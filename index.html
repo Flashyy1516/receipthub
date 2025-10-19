@@ -191,22 +191,27 @@ section{max-width:900px;margin:2em auto;background:rgba(15,38,30,0.96);border-ra
     <div class="plans">
       <div class="plan-card">
         <div class="plan-title">Daily</div>
-        <div class="plan-price"><span class="price-value" data-price="2.99">£2.99</span> /day</div>
+        <div class="plan-price"><span class="price-value" data-price="3.00">£3.00</span> /day</div>
         <div>Instant receipts,<br>Live support,<br>Discord access.</div>
       </div>
       <div class="plan-card">
         <div class="plan-title">Weekly</div>
-        <div class="plan-price"><span class="price-value" data-price="7.49">£7.49</span> /week</div>
+        <div class="plan-price"><span class="price-value" data-price="5.75">£5.75</span> /week</div>
         <div>Receipts, support, Discord,<br>Regular offers.</div>
       </div>
       <div class="plan-card">
         <div class="plan-title">Monthly</div>
-        <div class="plan-price"><span class="price-value" data-price="9.99">£9.99</span> /month</div>
+        <div class="plan-price"><span class="price-value" data-price="7.99">£7.99</span> /month</div>
         <div>Unlimited receipts,<br>Discord UI,<br>24/7 monitoring.</div>
+      </div>
+	  <div class="plan-card">
+        <div class="plan-title">3 Months</div>
+        <div class="plan-price"><span class="price-value" data-price="13.99">£13.99</span> /3 months</div>
+        <div>Unlimited receipts,<br>Discord UI,<br>24/7 customer care.</div>
       </div>
       <div class="plan-card">
         <div class="plan-title">Lifetime</div>
-        <div class="plan-price"><span class="price-value" data-price="29.99">£29.99</span></div>
+        <div class="plan-price"><span class="price-value" data-price="16.99">£16.99</span></div>
         <div>Lifetime access,<br>No limits,<br>Future features included.</div>
       </div>
     </div>
@@ -277,11 +282,11 @@ function openSubscriptionPopup() {
         <h3>Select your plan</h3>
         <select id="subscriptionSelect" class="subscription-select-glow">
           <option value="">Choose…</option>
-          <option value='{"productId":289768,"variantId":389735,"shopId":131587,"price":2.99}'>1 Day – £2.99</option>
-          <option value='{"productId":289839,"variantId":389891,"shopId":131587,"price":7.49}'>1 Week – £7.49</option>
-          <option value='{"productId":289844,"variantId":389901,"shopId":131587,"price":9.99}'>1 Month – £9.99</option>
-          <option value='{"productId":289845,"variantId":389907,"shopId":131587,"price":19.99}'>3 Months – £19.99</option>
-          <option value='{"productId":289846,"variantId":389913,"shopId":131587,"price":29.99}'>Lifetime – £29.99</option>
+          <option value='{"productId":289768,"variantId":389735,"shopId":131587,"price":3.00}'>1 Day – £3.00</option>
+          <option value='{"productId":289839,"variantId":389891,"shopId":131587,"price":5.75}'>1 Week – £5.75</option>
+          <option value='{"productId":289844,"variantId":389901,"shopId":131587,"price":7.99}'>1 Month – £7.99</option>
+          <option value='{"productId":289845,"variantId":389907,"shopId":131587,"price":13.99}'>3 Months – £13.99</option>
+          <option value='{"productId":289846,"variantId":389913,"shopId":131587,"price":16.99}'>Lifetime – £16.99</option>
         </select>
         <button class="popup-btn" id="continueSubBtn">Continue</button>
       </div>
